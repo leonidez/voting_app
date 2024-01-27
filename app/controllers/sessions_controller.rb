@@ -8,8 +8,10 @@ class SessionsController < ApplicationController
     @user = User.new(user_params)
 
     if existing_user
+      cookies.encrypted[:user_id] = existing_user.id
       redirect_to votes_new_url
     elsif @user.save
+      cookies.encrypted[:user_id] = @user.id
       redirect_to votes_new_url
     else
       render :new, status: :unprocessable_entity
