@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'votes/index'
+  get 'votes', to: 'votes#index'
   get 'votes/new'
 
   post '/sessions', to: 'sessions#create'

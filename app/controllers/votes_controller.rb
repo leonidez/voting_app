@@ -7,6 +7,7 @@ class VotesController < ApplicationController
 
     if !@user
       redirect_to root_url
+      flash[:notice] = 'Please log in before continuing.'
     end
   end
 end
