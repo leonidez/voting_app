@@ -1,11 +1,11 @@
-<%= form_with model: @user, url: '/sessions' do |f| %>
+<%= form_with model: @user_fields, url: '/sessions' do |f| %>
   <h1>Login Form</h1>
 
   <p>
     All fields are required.
   </p>
 
-  <% @user.errors.each do |error| %>
+  <% @user_fields.errors.each do |error| %>
     <li><%= error.full_message %></li>
   <% end %>
 
