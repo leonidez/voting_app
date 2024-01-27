@@ -8,6 +8,8 @@ class VotesController < ApplicationController
     if !@user
       redirect_to root_url
       flash[:notice] = 'Please log in before continuing.'
+    # elsif @user.has_voted
+    #   redirect_to votes_index_url
     end
   end
 end
