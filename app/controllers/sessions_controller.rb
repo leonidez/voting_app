@@ -1,6 +1,8 @@
+# typed: true
+
 class SessionsController < ApplicationController
   def new
-    existing_user = User.find_by_id(cookies.encrypted[:user_id])
+    existing_user = User.find_by(id: cookies.encrypted[:user_id])
 
     if existing_user
       redirect_to votes_new_url
@@ -10,7 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    existing_user = User.find_by_email(params[:email])
+    existing_user = User.find_by(email: params[:email])
     new_user = User.new(user_params)
 
     if existing_user
