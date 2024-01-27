@@ -4,10 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user_exists = User.find_by(user_params)
+    existing_user = User.find_by(user_params)
 
-    if user_exists
-      puts 'exists'
+    if existing_user
+      redirect_to votes_new_url
+
     else
       User.create!(user_params)
     end
