@@ -1,12 +1,23 @@
-<h1>Log In</h1>
-
 <%= form_with model: @user, url: '/sessions' do |f| %>
+  <h1>Login Form</h1>
 
-  <%= f.label :email %>
-  <%= f.email_field :email, class: 'form-control' %>
+  <p>
+    All fields are required.
+  </p>
 
-  <%= f.label :password %>
-  <%= f.text_field :zip_code, class: 'form-control' %>
+  <% @user.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+  <% end %>
+
+  <p>
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </p>
+
+  <p>
+    <%= f.label :zip_code %>
+    <%= f.text_field :zip_code, class: 'form-control' %>
+  </p>
 
   <%= f.submit "Log in", class: "btn btn-primary" %>
 <% end %>
