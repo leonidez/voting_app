@@ -1,7 +1,16 @@
-<h1>Cast your vote today!</h1>
+<%= form_with url: '/votes' do |form| %>
+  <fieldset>
+    <legend>Cast your vote today!</legend>
 
-<% @candidates.map do |candidate| %>
-  <%= candidate.name %>
+    <%= form.collection_radio_buttons :candidate_id, @candidates, :id, :name do |button| %>
+      <label>
+        <%= button.radio_button %>
+        <%= button.label %>
+      </label>
+    <% end %>
+  </fieldset>
+
+  <%= form.submit "Vote" %>
 <% end %>
 
 <p>
