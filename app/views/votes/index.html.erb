@@ -1,2 +1,9 @@
-<h1>Votes#index</h1>
-<p>Find me in app/views/votes/index.html.erb</p>
+<h1>Election Results</h1>
+
+<ul>
+  <% @candidates.map do |candidate| %>
+    <li>
+      <%= candidate.name %>: <%= candidate.votes.size %>
+    </li>
+  <% end %>
+</ul>
