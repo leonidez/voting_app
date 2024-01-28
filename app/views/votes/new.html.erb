@@ -1,2 +1,14 @@
-<h1>Votes#new</h1>
-<p>Find me in app/views/votes/new.html.erb</p>
+<h1>Cast your vote today!</h1>
+
+<% @candidates.map do |candidate| %>
+  <%= candidate.name %>
+<% end %>
+
+<p>
+  Or, add a new candidate:
+</p>
+
+<%= form_with model: @candidate_fields, url: '/candidates' do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>
