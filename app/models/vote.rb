@@ -1,4 +1,4 @@
 class Vote < ApplicationRecord
-  has_one :user
-  has_one :candidate
+  belongs_to :user
+  belongs_to :candidate
 end
