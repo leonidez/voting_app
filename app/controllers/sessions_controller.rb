@@ -13,16 +13,16 @@ class SessionsController < ApplicationController
 
   def create
     existing_user = User.find_by(email: params[:email])
-    new_user = User.new(user_params)
+    draft_user = User.new(user_params)
 
     if existing_user
       cookies.encrypted[:user_id] = existing_user.id
       redirect_to votes_new_url
-    elsif new_user.save
-      cookies.encrypted[:user_id] = new_user.id
+    elsif draft_user.save
+      cookies.encrypted[:user_id] = draft_user.id
       redirect_to votes_new_url
     else
-      @user_fields = new_user
+      @user_fields = draft_user
       render :new, status: :unprocessable_entity
     end
   end
