@@ -15,6 +15,10 @@
   Or, add a new candidate:
 </p>
 
+<% @candidate_fields.errors.each do |error| %>
+  <li><%= error.full_message %></li>
+<% end %>
+
 <%= form_with model: @candidate_fields, url: '/candidates' do |form| %>
   <%= form.text_field :name %>
   <%= form.submit %>

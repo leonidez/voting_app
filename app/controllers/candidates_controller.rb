@@ -3,10 +3,11 @@
 class CandidatesController < ApplicationController
   def create
     user = User.find_by(id: cookies.encrypted[:user_id])
+    candidate = Candidate.new(candidate_params)
 
     if user
       user.transaction do
-        candidate = Candidate.create!(candidate_params)
+        candidate.save!
         vote = Vote.create!(user: user, candidate: candidate)
 
         redirect_to votes_url
