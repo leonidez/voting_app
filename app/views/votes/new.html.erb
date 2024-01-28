@@ -3,10 +3,8 @@
     <legend>Cast your vote today!</legend>
 
     <%= form.collection_radio_buttons :candidate_id, @candidates, :id, :name do |button| %>
-      <label>
-        <%= button.radio_button %>
-        <%= button.label %>
-      </label>
+      <%= button.radio_button %>
+      <%= button.label %>
     <% end %>
   </fieldset>
 
