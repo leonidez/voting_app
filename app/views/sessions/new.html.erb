@@ -1,6 +1,5 @@
-<%= form_with model: @user_fields, url: '/sessions' do |f| %>
+<%= form_with model: @user_fields, url: '/sessions' do |form| %>
   <h1>Login Form</h1>
-
   <p>
     All fields are required.
   </p>
@@ -10,14 +9,14 @@
   <% end %>
 
   <p>
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
+    <%= form.label :email %>
+    <%= form.email_field :email, class: 'form-control' %>
   </p>
 
   <p>
-    <%= f.label :zip_code %>
-    <%= f.text_field :zip_code, class: 'form-control' %>
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code, class: 'form-control' %>
   </p>
 
-  <%= f.submit "Log in", class: "btn btn-primary" %>
+  <%= form.submit "Log in", class: "btn btn-primary" %>
 <% end %>
