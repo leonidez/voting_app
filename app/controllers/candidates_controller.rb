@@ -8,8 +8,7 @@ class CandidatesController < ApplicationController
     if user
       user.transaction do
         candidate.save!
-        vote = Vote.create!(user: user, candidate: candidate)
-
+        Vote.create!(user: user, candidate: candidate)
         redirect_to votes_url
         flash[:notice] = 'Thanks for voting!'
       rescue ActiveRecord::RecordInvalid
@@ -18,7 +17,6 @@ class CandidatesController < ApplicationController
         render 'votes/new', status: :unprocessable_entity
       end
     end
-
   end
 
   private
