@@ -3,9 +3,9 @@
 <p>Note: results will refresh after every ten votes.</p>
 
 <ul>
-  <% @candidates.map do |candidate| %>
+  <% @results.map do |result| %>
     <li>
-      <%= candidate.name %>: <%= candidate.votes.size %>
+      <%= result['name'] %>: <%= result['total_votes'] %>
     </li>
   <% end %>
 </ul>

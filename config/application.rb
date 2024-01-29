@@ -27,5 +27,6 @@ module VotingApp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.cache_store = :mem_cache_store, "cache.local.com", { pool: false }
+    config.action_controller.perform_caching = true
   end
 end

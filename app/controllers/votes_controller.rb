@@ -1,8 +1,12 @@
 # typed: true
 
+require 'json'
+
 class VotesController < ApplicationController
   def index
-    @candidates = Candidate.all
+    @results = JSON.parse(Rails.cache.read("election_results"))
+  rescue
+    @results = []
   end
 
   def new

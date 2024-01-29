@@ -12,12 +12,10 @@ class Vote < ApplicationRecord
       if Vote.count % 10 == 0
         results = Candidate
           .joins(:votes)
-          .select('candidatees.id, candidates.name, count(votes.candidate_id) as total_votes')
+          .select('candidates.id, candidates.name, count(votes.candidate_id) as total_votes')
           .group('votes.candidate_id')
 
-        Rails.cache.fetch("election_results") do
-          results.to_json
-        end
+        Rails.cache.write('election_results', results.to_json)
       end
     end
 end
