@@ -25,6 +25,7 @@ class ApplicationController
     include ::Importmap::ImportmapTagsHelper
     include ::ActionController::Base::HelperMethods
     include ::ApplicationHelper
+    include ::CandidatesHelper
     include ::SessionsHelper
     include ::VotesHelper
   end
