@@ -6,24 +6,22 @@
   var tag = document.getElementById('expiration')
   var expiration = tag.dataset.expiration
   var expireTime = new Date(expiration).getTime()
-  var minutes;
-  var seconds;
   var interval;
 
   function setTimeRemaining() {
     var current = new Date().getTime()
     var remaining = (expireTime - current) / 1000
-    minutes = Math.floor(remaining / 60)
-    seconds = Math.floor(remaining % 60)
+    var minutes = Math.floor(remaining / 60)
+    var seconds = Math.floor(remaining % 60)
 
-    if (minutes === 4 && seconds === 0) {
+    if (minutes === 0 && seconds === 0) {
       clearInterval(interval)
       window.location.replace('/votes')
+    } else {
+      var tensPlace = seconds < 10 ? '0' : ''
+      var timeRemaining = minutes + ':' + tensPlace + seconds + ' remaining'
+      document.getElementById('timer').innerText = timeRemaining
     }
-
-    var tensPlace = seconds < 10 ? '0' : ''
-    var timeRemaining = minutes + ':' + tensPlace + seconds + ' remaining'
-    document.getElementById('timer').innerText = timeRemaining
   }
 
   setTimeRemaining()
