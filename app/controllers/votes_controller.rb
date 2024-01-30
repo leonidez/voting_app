@@ -22,7 +22,7 @@ class VotesController < ApplicationController
       @vote_fields = Vote.new
       @candidate_fields = Candidate.new
       @candidates = Candidate.all
-      @expiration = Time.now + 5.minutes
+      @expiration = @user.session_expires_at.to_s
     end
   end
 

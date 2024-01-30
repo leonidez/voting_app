@@ -12,11 +12,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    existing_user = User.find_by(email: params[:email])
+    existing_user = User.find_by(user_params)
     draft_user = User.new(user_params)
     expiration = 5.minutes.from_now
 
-    if existing_user
+    existing_user.session_expires_at = expiration
+    draft_user.session_expires_at = expiration
+
+    if existing_user && existing_user.save
       create_user_cookie(existing_user.id, expiration)
       redirect_to votes_new_url
     elsif draft_user.save
