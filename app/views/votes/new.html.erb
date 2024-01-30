@@ -1,3 +1,38 @@
+<%= content_tag :div, nil, id: 'expiration', data: { expiration: @expiration } %>
+
+<p id='timer'></p>
+
+<%= javascript_tag do %>
+  var tag = document.getElementById('expiration')
+  var expiration = tag.dataset.expiration
+  var expireTime = new Date(expiration).getTime()
+  var minutes;
+  var seconds;
+  var interval;
+
+  function setTimeRemaining() {
+    var current = new Date().getTime()
+    var remaining = (expireTime - current) / 1000
+    minutes = Math.floor(remaining / 60)
+    seconds = Math.floor(remaining % 60)
+
+    if (minutes === 4 && seconds === 0) {
+      clearInterval(interval)
+      window.location.replace('/votes')
+    }
+
+    var tensPlace = seconds < 10 ? '0' : ''
+    var timeRemaining = minutes + ':' + tensPlace + seconds + ' remaining'
+    document.getElementById('timer').innerText = timeRemaining
+  }
+
+  setTimeRemaining()
+
+  interval = setInterval(function() {
+    setTimeRemaining()
+  }, 1000)
+<% end %>
+
 <%= form_with model: @vote_fields, url: '/votes' do |form| %>
   <fieldset>
     <legend>Cast your vote today!</legend>
