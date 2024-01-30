@@ -13,20 +13,20 @@ class SessionsController < ApplicationController
 
   def create
     existing_user = User.find_by(user_params)
-    draft_user = User.new(user_params)
+    new_user = User.new(user_params)
     expiration = 5.minutes.from_now
 
-    existing_user.session_expires_at = expiration
-    draft_user.session_expires_at = expiration
+    existing_user.session_expires_at = expiration if existing_user
+    new_user.session_expires_at = expiration
 
     if existing_user && existing_user.save
       create_user_cookie(existing_user.id, expiration)
       redirect_to votes_new_url
-    elsif draft_user.save
-      create_user_cookie(draft_user.id, expiration)
+    elsif new_user.save
+      create_user_cookie(new_user.id, expiration)
       redirect_to votes_new_url
     else
-      @user_fields = draft_user
+      @user_fields = new_user
       render :new, status: :unprocessable_entity
     end
   end
