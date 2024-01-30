@@ -17,12 +17,6 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
 
-  puts "== Setting up type checking =="
-  system! "bundle exec tapioca init"
-
-  puts "== Setting up types for dynamic methods =="
-  system! "bundle exec tapioca dsl"
-
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
   #   FileUtils.cp "config/database.yml.sample", "config/database.yml"
@@ -40,6 +34,12 @@ FileUtils.chdir APP_ROOT do
   else
     puts "\n== Cache is already started, skipping =="
   end
+
+  puts "== Setting up type checking =="
+  system! "bundle exec tapioca init"
+
+  puts "== Setting up types for dynamic methods =="
+  system! "bundle exec tapioca dsl"
 
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
