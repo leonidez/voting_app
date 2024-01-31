@@ -28,6 +28,19 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Removing old logs and tempfiles =="
   system! "bin/rails log:clear tmp:clear"
 
+  unless File.exist?("tmp/caching-dev.txt")
+    puts "\n== Starting the cache =="
+    system! "bin/rails dev:cache"
+  else
+    puts "\n== Cache is already started, skipping =="
+  end
+
+  puts "== Setting up type checking =="
+  system! "bundle exec tapioca init"
+
+  puts "== Setting up types for dynamic methods =="
+  system! "bundle exec tapioca dsl"
+
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
 end

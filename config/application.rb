@@ -1,3 +1,5 @@
+# typed: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -23,5 +25,8 @@ module VotingApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.cache_store = :mem_cache_store, "cache.local.com", { pool: false }
+    config.action_controller.perform_caching = true
   end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VotingApp</title>
+    <title>VOTE.WEBSITE</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,19 @@
   </head>
 
   <body>
+    <header>
+      <h1>VOTE.WEBSITE</h1>
+      <% if @user && @user.email %>
+        <p>signed in as <%= @user.email %></p>
+      <% end %>
+    </header>
+
+    <% flash.each do |type, message| %>
+      <p>
+        <%= message %>
+      </p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

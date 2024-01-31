@@ -1,0 +1,58 @@
+<%= content_tag :div, nil, id: 'expiration', data: { expiration: @expiration } %>
+
+<p id='timer'></p>
+
+<%= javascript_tag do %>
+  var tag = document.getElementById('expiration')
+  var expiration = tag.dataset.expiration
+  var expireTime = new Date(expiration).getTime()
+  var interval;
+
+  function setTimeRemaining() {
+    var current = new Date().getTime()
+    var remaining = (expireTime - current) / 1000
+    var minutes = Math.floor(remaining / 60)
+    var seconds = Math.floor(remaining % 60)
+
+    if (minutes === 0 && seconds === 0) {
+      clearInterval(interval)
+      window.location.replace('/votes')
+    } else {
+      var tensPlace = seconds < 10 ? '0' : ''
+      var timeRemaining = minutes + ':' + tensPlace + seconds + ' remaining'
+      document.getElementById('timer').innerText = timeRemaining
+    }
+  }
+
+  setTimeRemaining()
+
+  interval = setInterval(function() {
+    setTimeRemaining()
+  }, 1000)
+<% end %>
+
+<%= form_with model: @vote_fields, url: '/votes' do |form| %>
+  <fieldset>
+    <legend>Cast your vote today!</legend>
+
+    <%= form.collection_radio_buttons :candidate_id, @candidates, :id, :name do |button| %>
+      <%= button.radio_button %>
+      <%= button.label %>
+    <% end %>
+  </fieldset>
+
+  <%= form.submit "Vote" %>
+<% end %>
+
+<p>
+  Or, add a new candidate:
+</p>
+
+<% @candidate_fields.errors.each do |error| %>
+  <li><%= error.full_message %></li>
+<% end %>
+
+<%= form_with model: @candidate_fields, url: '/candidates' do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>

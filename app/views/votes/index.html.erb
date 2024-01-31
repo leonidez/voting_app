@@ -1,0 +1,11 @@
+<h1>Election Results</h1>
+
+<p>Note: results will refresh after every ten votes.</p>
+
+<ul>
+  <% @results.map do |result| %>
+    <li>
+      <%= result['name'] %>: <%= result['total_votes'] %>
+    </li>
+  <% end %>
+</ul>

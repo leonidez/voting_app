@@ -1,0 +1,22 @@
+<%= form_with model: @user_fields, url: '/sessions' do |form| %>
+  <h1>Login Form</h1>
+  <p>
+    All fields are required.
+  </p>
+
+  <% @user_fields.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+  <% end %>
+
+  <p>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code %>
+  </p>
+
+  <%= form.submit "Log in" %>
+<% end %>
